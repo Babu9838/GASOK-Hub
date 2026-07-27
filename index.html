@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>GASOK Hub | GIWA Ecosystem Dashboard</title>
 
     <link rel="stylesheet" href="style.css">
@@ -12,9 +14,10 @@
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
+    <!-- ================= HEADER ================= -->
 
     <header>
+
         <nav class="navbar">
 
             <div class="logo">
@@ -22,20 +25,31 @@
             </div>
 
             <ul class="nav-links">
+
                 <li><a href="#">Home</a></li>
+
                 <li><a href="pages/docs.html">Docs</a></li>
+
                 <li><a href="pages/wallet.html">Wallet</a></li>
+
                 <li><a href="pages/explorer.html">Explorer</a></li>
+
                 <li><a href="pages/faucet.html">Faucet</a></li>
+
                 <li><a href="pages/about.html">About</a></li>
+
             </ul>
 
-            <!-- Wallet Connect Button -->
-            <button id="connectWallet" class="wallet-btn">
+            <button
+                id="connectWallet"
+                class="wallet-btn">
+
                 Connect Wallet
+
             </button>
 
         </nav>
+
     </header>
 
     <!-- ================= HERO ================= -->
@@ -43,35 +57,120 @@
     <section class="hero">
 
         <h1>
+
             Build, Explore & Connect
+
             <br>
+
             with the GIWA Ecosystem
+
         </h1>
 
         <p>
-            GASOK Hub is an open-source Web3 dashboard built for developers,
-            builders, and community members. Access wallet tools,
-            blockchain utilities, documentation, and ecosystem resources
+
+            GASOK Hub is an open-source Web3 dashboard built for
+            developers, builders and community members.
+
+            Access wallet tools, blockchain utilities,
+            developer documentation and ecosystem resources
             from one place.
+
         </p>
 
         <div class="hero-buttons">
 
-            <a href="pages/wallet.html" class="btn-primary">
+            <a
+                href="pages/wallet.html"
+                class="btn-primary">
+
                 Launch App
+
             </a>
 
-            <a href="pages/docs.html" class="btn-secondary">
+            <a
+                href="pages/docs.html"
+                class="btn-secondary">
+
                 Explore Docs
+
             </a>
 
         </div>
 
     </section>
 
-    <!-- ================= FEATURES ================= -->
+    <!-- ================= Wallet Dashboard ================= -->
 
-    <section class="features">
+    <section class="wallet-dashboard">
+
+        <h2>Your Wallet Dashboard</h2>
+
+        <div class="wallet-card">
+
+            <div class="wallet-item">
+
+                <h3>Wallet Address</h3>
+
+                <p id="walletAddress">
+
+                    Not Connected
+
+                </p>
+
+            </div>
+
+            <div class="wallet-item">
+
+                <h3>Current Network</h3>
+
+                <p id="networkName">
+
+                    Not Connected
+
+                </p>
+
+            </div>
+
+            <div class="wallet-item">
+
+                <h3>Wallet Balance</h3>
+
+                <p id="walletBalance">
+
+                    0 ETH
+
+                </p>
+
+            </div>
+
+            <div class="wallet-actions">
+
+                <button
+                    id="copyAddress"
+                    class="wallet-btn">
+
+                    Copy Address
+
+                </button>
+
+                <a
+                    id="viewExplorer"
+                    href="#"
+                    target="_blank"
+                    class="wallet-btn">
+
+                    View Explorer
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= FEATURES ================= -->
+<section class="features">
 
         <h2>Everything You Need</h2>
 
@@ -79,32 +178,32 @@
 
             <div class="card">
                 <h3>🔗 Wallet Connect</h3>
-                <p>Securely connect your MetaMask wallet.</p>
+                <p>Securely connect your MetaMask wallet and manage your Web3 identity.</p>
             </div>
 
             <div class="card">
-                <h3>🌐 Network Tools</h3>
-                <p>View network information and switch to GIWA.</p>
+                <h3>🌐 GIWA Network</h3>
+                <p>Automatically connect and switch to the GIWA Sepolia network.</p>
             </div>
 
             <div class="card">
                 <h3>🚰 Faucet</h3>
-                <p>Get test tokens for development.</p>
+                <p>Access test tokens for building and testing applications.</p>
             </div>
 
             <div class="card">
                 <h3>🔍 Explorer</h3>
-                <p>Explore addresses, blocks and transactions.</p>
+                <p>Search blocks, transactions, smart contracts and wallet addresses.</p>
             </div>
 
             <div class="card">
                 <h3>📚 Developer Docs</h3>
-                <p>Quick access to official GIWA documentation.</p>
+                <p>Quick access to the official GIWA developer documentation.</p>
             </div>
 
             <div class="card">
                 <h3>⚡ Web3 Utilities</h3>
-                <p>Powerful tools for developers and users.</p>
+                <p>Powerful tools designed for developers and ecosystem users.</p>
             </div>
 
         </div>
@@ -115,16 +214,27 @@
 
     <section class="roadmap">
 
-        <h2>Coming Soon</h2>
+        <h2>Upcoming Features</h2>
 
         <div class="roadmap-list">
 
             <div>✅ Wallet Balance</div>
+
             <div>✅ Send Tokens</div>
+
             <div>✅ Transaction History</div>
+
             <div>✅ Smart Contract Interaction</div>
-            <div>✅ GIWA ID Integration</div>
-            <div>✅ AI Docs Assistant</div>
+
+            <div>✅ GIWA Network Auto Switch</div>
+
+            <div>✅ Copy Wallet Address</div>
+
+            <div>✅ View on Explorer</div>
+
+            <div>✅ Faucet Integration</div>
+
+            <div>✅ AI Assistant</div>
 
         </div>
 
@@ -137,13 +247,23 @@
         <h3>⚡ GASOK Hub</h3>
 
         <p>
-            An open-source Web3 dashboard for the GIWA ecosystem.
+            A modern open-source dashboard for the GIWA ecosystem.
         </p>
 
         <div class="footer-links">
-            <a href="https://github.com/Babu9838/GASOK-Hub" target="_blank">GitHub</a>
-            <a href="https://docs.giwa.io/" target="_blank">GIWA Docs</a>
-            <a href="#">Explorer</a>
+
+            <a href="https://github.com/Babu9838/GASOK-Hub" target="_blank">
+                GitHub
+            </a>
+
+            <a href="https://docs.giwa.io/" target="_blank">
+                GIWA Docs
+            </a>
+
+            <a href="https://sepolia-explorer.giwa.io/" target="_blank">
+                Explorer
+            </a>
+
         </div>
 
         <p class="copyright">
@@ -155,4 +275,5 @@
     <script src="script.js"></script>
 
 </body>
+
 </html>
