@@ -1,7 +1,7 @@
-// ======================================
-// GASOK Hub v1.0
-// GIWA Wallet Integration
-// ======================================
+// =======================================
+// GASOK Hub v2
+// Brave Wallet + MetaMask Support
+// =======================================
 
 // DOM Elements
 const connectBtn = document.getElementById("connectWallet");
@@ -13,11 +13,12 @@ const copyBtn = document.getElementById("copyAddress");
 const explorerBtn = document.getElementById("viewExplorer");
 
 // Wallet Variables
-let provider;
-let signer;
+let provider = null;
+let signer = null;
 let account = null;
+let ethereum = null;
 
-// Official GIWA Network
+// GIWA Network
 const GIWA = {
 
     chainId: "0x164CE",
@@ -26,7 +27,7 @@ const GIWA = {
 
     nativeCurrency: {
 
-        name: "ETH",
+        name: "Ethereum",
 
         symbol: "ETH",
 
@@ -48,15 +49,73 @@ const GIWA = {
 
 };
 
-// ===============================
-// Switch Network
-// ===============================
+// =======================================
+// Detect Wallet
+// =======================================
 
-async function switchNetwork() {
+function detectWallet() {
+
+    if (!window.ethereum) {
+
+        return null;
+
+    }
+
+    // Multiple Wallets
+    if (window.ethereum.providers) {
+
+        const providers =
+            window.ethereum.providers;
+
+        // Prefer MetaMask
+        let metaMask =
+            providers.find(
+                p => p.isMetaMask
+            );
+
+        if (metaMask) {
+
+            return metaMask;
+
+        }
+
+        // Prefer Brave Wallet
+        let brave =
+            providers.find(
+                p => p.isBraveWallet
+            );
+
+        if (brave) {
+
+            return brave;
+
+        }
+
+        return providers[0];
+
+    }
+
+    return window.ethereum;
+
+}
+
+// =======================================
+// Switch Network
+// =======================================
+
+async function switchGIWA() {
+
+    ethereum = detectWallet();
+
+    if (!ethereum) {
+
+        throw new Error("Wallet not found");
+
+    }
 
     try {
 
-        await window.ethereum.request({
+        await ethereum.request({
 
             method: "wallet_switchEthereumChain",
 
@@ -78,7 +137,7 @@ async function switchNetwork() {
 
         if (error.code === 4902) {
 
-            await window.ethereum.request({
+            await ethereum.request({
 
                 method: "wallet_addEthereumChain",
 
@@ -101,31 +160,35 @@ async function switchNetwork() {
     }
 
 }
-
-// ===============================
+// =======================================
 // Connect Wallet
-// ===============================
+// =======================================
 
 async function connectWallet() {
 
-    if (!window.ethereum) {
-
-        alert("Please install MetaMask.");
-
-        return;
-
-    }
-
     try {
 
-        await switchNetwork();
+        ethereum = detectWallet();
+
+        if (!ethereum) {
+
+            alert("No Web3 wallet found.");
+
+            return;
+
+        }
+
+        await switchGIWA();
 
         provider =
-            new ethers.providers.Web3Provider(window.ethereum);
+            new ethers.providers.Web3Provider(ethereum);
 
         await provider.send(
+
             "eth_requestAccounts",
+
             []
+
         );
 
         signer =
@@ -133,41 +196,46 @@ async function connectWallet() {
 
         account =
             await signer.getAddress();
-        // Wallet Address
-        walletAddress.textContent = account;
 
-        // Network Name
-        networkName.textContent = "GIWA Sepolia";
+        const balance =
+            await provider.getBalance(account);
 
-        // Short Address on Button
+        walletAddress.textContent =
+            account;
+
+        walletBalance.textContent =
+            parseFloat(
+
+                ethers.utils.formatEther(balance)
+
+            ).toFixed(4) + " ETH";
+
+        networkName.textContent =
+            "GIWA Sepolia";
+
         connectBtn.textContent =
             account.slice(0, 6) +
             "..." +
             account.slice(-4);
 
-        // Explorer Link
         explorerBtn.href =
             "https://sepolia-explorer.giwa.io/address/" +
             account;
 
-        // Get Balance
-        const balance =
-            await provider.getBalance(account);
-
-        walletBalance.textContent =
-            Number(
-                ethers.utils.formatEther(balance)
-            ).toFixed(4) + " ETH";
-
-        // Save Session
         localStorage.setItem(
+
             "gasok_wallet",
+
             account
+
         );
 
         console.log(
-            "Connected:",
+
+            "Wallet Connected:",
+
             account
+
         );
 
     }
@@ -177,15 +245,49 @@ async function connectWallet() {
         console.error(error);
 
         alert(
+
             "Wallet connection failed."
+
         );
 
     }
 
 }
-// ===============================
+
+// =======================================
+// Disconnect Wallet
+// =======================================
+
+function disconnectWallet() {
+
+    account = null;
+
+    provider = null;
+
+    signer = null;
+
+    walletAddress.textContent =
+        "Not Connected";
+
+    walletBalance.textContent =
+        "0 ETH";
+
+    networkName.textContent =
+        "Not Connected";
+
+    connectBtn.textContent =
+        "Connect Wallet";
+
+    explorerBtn.href = "#";
+
+    localStorage.removeItem(
+        "gasok_wallet"
+    );
+
+}
+// =======================================
 // Copy Wallet Address
-// ===============================
+// =======================================
 
 async function copyAddress() {
 
@@ -201,7 +303,7 @@ async function copyAddress() {
 
         await navigator.clipboard.writeText(account);
 
-        alert("Wallet address copied!");
+        alert("Wallet address copied.");
 
     }
 
@@ -209,15 +311,13 @@ async function copyAddress() {
 
         console.error(error);
 
-        alert("Copy failed.");
-
     }
 
 }
 
-// ===============================
+// =======================================
 // Auto Reconnect
-// ===============================
+// =======================================
 
 async function autoReconnect() {
 
@@ -230,8 +330,10 @@ async function autoReconnect() {
 
     try {
 
+        ethereum = detectWallet();
+
         provider =
-            new ethers.providers.Web3Provider(window.ethereum);
+            new ethers.providers.Web3Provider(ethereum);
 
         const accounts =
             await provider.listAccounts();
@@ -252,9 +354,34 @@ async function autoReconnect() {
 
 }
 
-// ===============================
-// Event Listeners
-// ===============================
+// =======================================
+// Explorer Button
+// =======================================
+
+function openExplorer() {
+
+    if (!account) {
+
+        alert("Connect your wallet first.");
+
+        return;
+
+    }
+
+    window.open(
+
+        "https://sepolia-explorer.giwa.io/address/" +
+        account,
+
+        "_blank"
+
+    );
+
+}
+
+// =======================================
+// Button Events
+// =======================================
 
 if (connectBtn) {
 
@@ -292,9 +419,26 @@ if (copyBtn) {
 
 }
 
-// ===============================
-// MetaMask Events
-// ===============================
+if (explorerBtn) {
+
+    explorerBtn.addEventListener(
+
+        "click",
+
+        function(e){
+
+            e.preventDefault();
+
+            openExplorer();
+
+        }
+
+    );
+
+}
+// =======================================
+// Wallet Events
+// =======================================
 
 if (window.ethereum) {
 
@@ -302,9 +446,17 @@ if (window.ethereum) {
 
         "accountsChanged",
 
-        function () {
+        async function (accounts) {
 
-            location.reload();
+            if (accounts.length === 0) {
+
+                disconnectWallet();
+
+                return;
+
+            }
+
+            connectWallet();
 
         }
 
@@ -316,7 +468,7 @@ if (window.ethereum) {
 
         function () {
 
-            location.reload();
+            window.location.reload();
 
         }
 
@@ -324,105 +476,38 @@ if (window.ethereum) {
 
 }
 
-// ===============================
-// Page Load
-// ===============================
+// =======================================
+// Auto Load
+// =======================================
 
 window.addEventListener(
 
     "load",
 
-    autoReconnect
+    async function () {
+
+        try {
+
+            await autoReconnect();
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+        }
+
+    }
 
 );
-// ===============================
-// Send Native ETH
-// ===============================
 
-async function sendNativeToken(receiver, amount) {
-
-    if (!signer) {
-
-        alert("Connect your wallet first.");
-
-        return;
-
-    }
-
-    try {
-
-        const tx = await signer.sendTransaction({
-
-            to: receiver,
-
-            value: ethers.utils.parseEther(amount)
-
-        });
-
-        alert("Transaction Submitted");
-
-        console.log(tx.hash);
-
-        await tx.wait();
-
-        alert("Transaction Confirmed");
-
-        connectWallet();
-
-    }
-
-    catch (error) {
-
-        console.error(error);
-
-        alert(error.message);
-
-    }
-
-}
-
-// ===============================
-// Loading Helper
-// ===============================
-
-function setLoading(state) {
-
-    if (!connectBtn) return;
-
-    if (state) {
-
-        connectBtn.disabled = true;
-
-        connectBtn.textContent = "Connecting...";
-
-    }
-
-    else {
-
-        connectBtn.disabled = false;
-
-        if (account) {
-
-            connectBtn.textContent =
-                account.slice(0, 6) +
-                "..." +
-                account.slice(-4);
-
-        }
-
-        else {
-
-            connectBtn.textContent =
-                "Connect Wallet";
-
-        }
-
-    }
-
-}
-
-// ===============================
+// =======================================
 // Console
-// ===============================
+// =======================================
 
-console.log("✅ GASOK Hub v1.0 Loaded");
+console.log(
+
+    "✅ GASOK Hub v2 Loaded"
+
+);
