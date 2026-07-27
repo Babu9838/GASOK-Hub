@@ -116,12 +116,13 @@ async function connectWallet() {
 
     }
 
+// await switchToGIWA();
     ...
 }
 
     try {
 
-        await switchToGIWA();
+        // await switchToGIWA();
 
         provider =
             new ethers.providers.Web3Provider(window.ethereum);
