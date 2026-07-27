@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GASOK Hub | GIWA Ecosystem Dashboard</title>
+
+    <title>GASOK Hub | GIWA Dashboard</title>
+
+    <link rel="icon" href="assets/favicon.png">
 
     <link rel="stylesheet" href="style.css">
 
@@ -13,210 +16,269 @@
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+<!-- ================= HEADER ================= -->
 
-    <header>
+<header>
 
-        <nav class="navbar">
+<nav class="navbar">
 
-            <div class="logo">
-                <h2>⚡ GASOK Hub</h2>
-            </div>
+<div class="logo">
 
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Docs</a></li>
-                <li><a href="#">Wallet</a></li>
-                <li><a href="#">Explorer</a></li>
-                <li><a href="#">Faucet</a></li>
-                <li><a href="#">About</a></li>
-            </ul>
+<img src="assets/logo.png" alt="GASOK Logo">
 
-            <button id="connectWallet" class="wallet-btn">
-                Connect Wallet
-            </button>
+<h2>GASOK Hub</h2>
 
-        </nav>
+</div>
 
-    </header>
+<ul class="nav-links">
 
-    <!-- ================= HERO ================= -->
+<li><a href="#features">Features</a></li>
 
-    <section class="hero">
+<li><a href="#dashboard">Dashboard</a></li>
 
-        <h1>
-            Build, Explore & Connect
-            <br>
-            with the GIWA Ecosystem
-        </h1>
+<li><a href="#roadmap">Roadmap</a></li>
 
-        <p>
-            GASOK Hub is an open-source Web3 dashboard built for developers,
-            builders and community members. Access wallet tools, blockchain
-            utilities and ecosystem resources from one place.
-        </p>
+<li><a href="https://docs.giwa.io/" target="_blank">Docs</a></li>
 
-        <div class="hero-buttons">
+</ul>
 
-            <a href="#" class="btn-primary">
-                Launch App
-            </a>
+<button id="connectWallet" class="wallet-btn">
 
-            <a href="https://docs.giwa.io/" target="_blank" class="btn-secondary">
-                Explore Docs
-            </a>
+Connect Wallet
 
-        </div>
+</button>
 
-    </section>
+</nav>
 
-    <!-- ================= Wallet Dashboard ================= -->
+</header>
 
-    <section class="wallet-dashboard">
+<!-- ================= HERO ================= -->
 
-        <h2>Your Wallet Dashboard</h2>
+<section class="hero">
 
-        <div class="wallet-card">
+<h1>
 
-            <div class="wallet-item">
-                <h3>Wallet Address</h3>
-                <p id="walletAddress">Not Connected</p>
-            </div>
+Build Faster on
 
-            <div class="wallet-item">
-                <h3>Current Network</h3>
-                <p id="networkName">Not Connected</p>
-            </div>
+<span>GIWA</span>
 
-            <div class="wallet-item">
-                <h3>Wallet Balance</h3>
-                <p id="walletBalance">0 ETH</p>
-            </div>
+</h1>
 
-            <div class="wallet-actions">
+<p>
 
-                <button id="copyAddress" class="wallet-btn">
-                    Copy Address
-                </button>
+GASOK Hub is an open-source Web3 dashboard for the GIWA ecosystem.
 
-                <a id="viewExplorer"
-                   href="#"
-                   target="_blank"
-                   class="wallet-btn">
-                    View Explorer
-                </a>
+Connect your wallet, view balances, explore the blockchain and build faster.
 
-                <button id="disconnectWallet" class="wallet-btn">
-                    Disconnect
-                </button>
+</p>
 
-            </div>
+<a href="#dashboard" class="hero-btn">
 
-        </div>
+Launch Dashboard
 
-    </section>
+</a>
 
-    <!-- ================= Send Token ================= -->
+</section>
 
-    <section class="send-token">
+<!-- ================= DASHBOARD ================= -->
 
-        <h2>Send ETH</h2>
+<section id="dashboard" class="dashboard">
 
-        <div class="send-card">
+<h2>
 
-            <label for="recipient">
-                Recipient Address
-            </label>
+Wallet Dashboard
 
-            <input
-                type="text"
-                id="recipient"
-                placeholder="0x..."
-            >
+</h2>
 
-            <label for="amount">
-                Amount (ETH)
-            </label>
+<div class="dashboard-card">
 
-            <input
-                type="number"
-                id="amount"
-                placeholder="0.01"
-                step="0.0001"
-            >
+<div class="item">
 
-            <button
-                id="sendToken"
-                class="wallet-btn">
+<h3>Wallet</h3>
 
-                Send ETH
+<p id="walletAddress">
 
-            </button>
+Not Connected
 
-            <p id="txStatus"></p>
+</p>
 
-        </div>
+</div>
 
-    </section>
+<div class="item">
 
-    <!-- ================= FEATURES ================= --><section class="features">
+<h3>Network</h3>
 
-    <h2>Everything You Need</h2>
+<p id="networkName">
 
-    <div class="feature-grid">
+Not Connected
 
-        <div class="card">
-            <h3>🔗 Wallet Connect</h3>
-            <p>Securely connect your MetaMask wallet and manage your Web3 identity.</p>
-        </div>
+</p>
 
-        <div class="card">
-            <h3>🌐 GIWA Network</h3>
-            <p>Automatically add and switch to the GIWA Sepolia network.</p>
-        </div>
+</div>
 
-        <div class="card">
-            <h3>🚰 Faucet</h3>
-            <p>Get test ETH to build and test your applications.</p>
-        </div>
+<div class="item">
 
-        <div class="card">
-            <h3>🔍 Explorer</h3>
-            <p>View transactions, wallet addresses and smart contracts.</p>
-        </div>
+<h3>Balance</h3>
 
-        <div class="card">
-            <h3>📚 Developer Docs</h3>
-            <p>Quick access to the official GIWA documentation.</p>
-        </div>
+<p id="walletBalance">
 
-        <div class="card">
-            <h3>⚡ Web3 Utilities</h3>
-            <p>Useful blockchain tools for developers and community members.</p>
-        </div>
+0 ETH
 
-    </div>
+</p>
+
+</div>
+
+<div class="buttons">
+
+<button
+id="copyAddress"
+class="wallet-btn">
+
+Copy Address
+
+</button>
+
+<a
+id="viewExplorer"
+class="wallet-btn"
+href="#"
+target="_blank">
+
+Explorer
+
+</a>
+
+<button
+id="disconnectWallet"
+class="wallet-btn">
+
+Disconnect
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= FEATURES ================= -->
+
+<section id="features" class="features">
+
+<h2>
+
+Features
+
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>🔗 Wallet Connect</h3>
+
+<p>
+
+Connect MetaMask instantly.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>⚡ GIWA Network</h3>
+
+<p>
+
+Auto switch to GIWA Sepolia.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>💰 Balance</h3>
+
+<p>
+
+View wallet balance.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>📋 Copy Address</h3>
+
+<p>
+
+One click copy.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🔎 Explorer</h3>
+
+<p>
+
+Open your address in Explorer.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>🚀 Open Source</h3>
+
+<p>
+
+Built for the GIWA community.
+
+</p>
+
+</div>
+
+</div>
 
 </section>
 
 <!-- ================= ROADMAP ================= -->
 
-<section class="roadmap">
+<section id="roadmap" class="roadmap">
 
-    <h2>Upcoming Features</h2>
+<h2>
 
-    <div class="roadmap-list">
+Roadmap
 
-        <div>✅ Wallet Balance</div>
-        <div>✅ Send ETH</div>
-        <div>✅ Transaction History</div>
-        <div>✅ Smart Contract Interaction</div>
-        <div>✅ Network Auto Switch</div>
-        <div>✅ Explorer Integration</div>
-        <div>✅ Faucet Integration</div>
-        <div>✅ AI Assistant</div>
+</h2>
 
-    </div>
+<ul>
+
+<li>✅ Wallet Connect</li>
+
+<li>✅ Disconnect Wallet</li>
+
+<li>✅ Wallet Balance</li>
+
+<li>⬜ Send Tokens</li>
+
+<li>⬜ Transaction History</li>
+
+<li>⬜ Faucet Integration</li>
+
+<li>⬜ Smart Contract Interaction</li>
+
+<li>⬜ AI Assistant</li>
+
+</ul>
 
 </section>
 
@@ -224,39 +286,30 @@
 
 <footer>
 
-    <h3>⚡ GASOK Hub</h3>
+<h3>
 
-    <p>
-        An open-source Web3 dashboard built for the GIWA ecosystem.
-    </p>
+GASOK Hub
 
-    <div class="footer-links">
+</h3>
 
-        <a href="https://github.com/Babu9838/GASOK-Hub" target="_blank">
-            GitHub
-        </a>
+<p>
 
-        <a href="https://docs.giwa.io/" target="_blank">
-            GIWA Docs
-        </a>
+Built for the GIWA Ecosystem.
 
-        <a href="https://sepolia-explorer.giwa.io/" target="_blank">
-            GIWA Explorer
-        </a>
+</p>
 
-    </div>
+<p>
 
-    <p class="copyright">
-        © 2026 GASOK Hub • Built with ❤️ by Babu Saha
-    </p>
+Made with ❤️ by Babu Saha
+
+</p>
 
 </footer>
 
-<!-- Ethers.js -->
 <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
-<!-- Main Script -->
 <script src="script.js"></script>
 
 </body>
+
 </html>
