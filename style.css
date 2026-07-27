@@ -1,6 +1,6 @@
-/* =========================
-   GASOK Hub - style.css
-========================= */
+/* ===========================
+   GASOK Hub v1.0
+=========================== */
 
 *{
     margin:0;
@@ -13,311 +13,415 @@ html{
 }
 
 body{
+
     font-family:'Inter',sans-serif;
-    background:#0B0F19;
-    color:#fff;
+
+    background:#08111f;
+
+    color:#ffffff;
+
     line-height:1.6;
+
 }
 
-/* Background Glow */
+/* ================= HEADER ================= */
 
-body::before{
-    content:"";
-    position:fixed;
-    width:500px;
-    height:500px;
-    background:#3B82F6;
-    filter:blur(180px);
-    opacity:.18;
-    top:-180px;
-    right:-180px;
-    z-index:-2;
+header{
+
+    width:100%;
+
+    background:#0f172a;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
 }
-
-body::after{
-    content:"";
-    position:fixed;
-    width:450px;
-    height:450px;
-    background:#22D3EE;
-    filter:blur(180px);
-    opacity:.12;
-    bottom:-150px;
-    left:-150px;
-    z-index:-2;
-}
-
-/* =========================
-   Navbar
-========================= */
 
 .navbar{
-    width:90%;
+
     max-width:1200px;
+
     margin:auto;
-    padding:25px 0;
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
-    flex-wrap:wrap;
-    gap:20px;
+
+    padding:18px 25px;
+
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.logo img{
+
+    width:42px;
+
+    height:42px;
+
 }
 
 .logo h2{
-    color:#3B82F6;
-    font-size:1.8rem;
+
+    color:#3b82f6;
+
 }
 
 .nav-links{
+
     display:flex;
-    gap:25px;
+
     list-style:none;
-    flex-wrap:wrap;
+
+    gap:28px;
+
 }
 
 .nav-links a{
-    color:#fff;
+
     text-decoration:none;
+
+    color:#fff;
+
     transition:.3s;
-    font-weight:500;
+
 }
 
 .nav-links a:hover{
-    color:#22D3EE;
+
+    color:#3b82f6;
+
 }
 
-/* Wallet Button */
+/* ================= BUTTON ================= */
 
-.wallet-btn{
-    background:#3B82F6;
-    color:#fff;
+.wallet-btn,
+.hero-btn{
+
+    background:#2563eb;
+
+    color:white;
+
     border:none;
-    padding:12px 22px;
+
+    text-decoration:none;
+
+    padding:12px 24px;
+
     border-radius:10px;
+
     cursor:pointer;
+
     font-weight:600;
+
     transition:.3s;
+
+    display:inline-block;
+
 }
 
-.wallet-btn:hover{
-    background:#2563EB;
+.wallet-btn:hover,
+.hero-btn:hover{
+
+    background:#1d4ed8;
+
     transform:translateY(-2px);
-    box-shadow:0 0 20px rgba(59,130,246,.45);
+
 }
 
-/* =========================
-Hero
-========================= */
+/* ================= HERO ================= */
 
 .hero{
-    width:90%;
+
     max-width:1100px;
-    margin:90px auto;
+
+    margin:auto;
+
     text-align:center;
+
+    padding:100px 20px;
+
 }
 
 .hero h1{
-    font-size:3.4rem;
-    line-height:1.2;
-    margin-bottom:25px;
+
+    font-size:55px;
+
+    margin-bottom:20px;
+
+}
+
+.hero span{
+
+    color:#3b82f6;
+
 }
 
 .hero p{
-    color:#94A3B8;
+
     max-width:760px;
+
     margin:auto;
-    font-size:1.1rem;
+
+    color:#cbd5e1;
+
+    margin-bottom:35px;
+
 }
 
-.hero-buttons{
-    margin-top:45px;
+/* ================= DASHBOARD ================= */
+
+.dashboard{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:70px 20px;
+
+}
+
+.dashboard h2{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+.dashboard-card{
+
+    background:#111c31;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    padding:30px;
+
+}
+
+.item{
+
+    margin-bottom:22px;
+
+}
+
+.item h3{
+
+    color:#60a5fa;
+
+    margin-bottom:8px;
+
+}
+
+.buttons{
+
     display:flex;
-    justify-content:center;
-    gap:18px;
+
+    gap:15px;
+
     flex-wrap:wrap;
+
+    margin-top:25px;
+
 }
 
-.btn-primary,
-.btn-secondary{
-    text-decoration:none;
-    padding:15px 34px;
-    border-radius:12px;
-    transition:.3s;
-    font-weight:600;
-}
-
-.btn-primary{
-    background:#3B82F6;
-    color:white;
-}
-
-.btn-primary:hover{
-    transform:translateY(-3px);
-    box-shadow:0 0 25px rgba(59,130,246,.45);
-}
-
-.btn-secondary{
-    border:1px solid #3B82F6;
-    color:#3B82F6;
-}
-
-.btn-secondary:hover{
-    background:#3B82F6;
-    color:white;
-}
-
-/* =========================
-Features
-========================= */
+/* ================= FEATURES ================= */
 
 .features{
-    width:90%;
+
     max-width:1200px;
-    margin:110px auto;
+
+    margin:auto;
+
+    padding:70px 20px;
+
 }
 
 .features h2{
+
     text-align:center;
-    font-size:2.3rem;
-    margin-bottom:50px;
+
+    margin-bottom:40px;
+
 }
 
-.feature-grid{
+.grid{
+
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:28px;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:25px;
+
 }
 
 .card{
-    background:#151C2C;
-    border:1px solid rgba(255,255,255,.05);
-    border-radius:18px;
-    padding:30px;
-    transition:.35s;
+
+    background:#111c31;
+
+    border-radius:16px;
+
+    padding:25px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.3s;
+
 }
 
 .card:hover{
-    transform:translateY(-8px);
-    border-color:#3B82F6;
-    box-shadow:0 0 35px rgba(59,130,246,.25);
+
+    transform:translateY(-6px);
+
+    border-color:#3b82f6;
+
 }
 
 .card h3{
+
     margin-bottom:15px;
+
+    color:#60a5fa;
+
 }
 
 .card p{
-    color:#94A3B8;
+
+    color:#cbd5e1;
+
 }
 
-/* =========================
-Roadmap
-========================= */
+/* ================= ROADMAP ================= */
 
 .roadmap{
-    width:90%;
-    max-width:1000px;
-    margin:120px auto;
-    text-align:center;
+
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:70px 20px;
+
 }
 
 .roadmap h2{
-    font-size:2.2rem;
-    margin-bottom:40px;
+
+    text-align:center;
+
+    margin-bottom:30px;
+
 }
 
-.roadmap-list{
+.roadmap ul{
+
+    list-style:none;
+
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:18px;
+
+    gap:15px;
+
 }
 
-.roadmap-list div{
-    background:#151C2C;
-    padding:18px;
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,.06);
+.roadmap li{
+
+    background:#111c31;
+
+    padding:16px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(255,255,255,.08);
+
 }
 
-/* =========================
-Footer
-========================= */
+/* ================= FOOTER ================= */
 
 footer{
-    margin-top:120px;
-    padding:50px 20px;
+
     text-align:center;
-    border-top:1px solid rgba(255,255,255,.08);
+
+    padding:50px 20px;
+
+    background:#0f172a;
+
+    margin-top:60px;
+
 }
 
 footer h3{
-    color:#3B82F6;
-    margin-bottom:15px;
+
+    color:#3b82f6;
+
+    margin-bottom:10px;
+
 }
 
 footer p{
-    color:#94A3B8;
-}
 
-.footer-links{
-    margin:25px 0;
-    display:flex;
-    justify-content:center;
-    gap:25px;
-    flex-wrap:wrap;
-}
+    color:#cbd5e1;
 
-.footer-links a{
-    text-decoration:none;
-    color:#fff;
-    transition:.3s;
-}
-
-.footer-links a:hover{
-    color:#22D3EE;
-}
-
-.copyright{
-    margin-top:20px;
-    font-size:.9rem;
-}
-
-/* =========================
-Responsive
-========================= */
-
-@media(max-width:900px){
-
-    .navbar{
-        flex-direction:column;
-        text-align:center;
-    }
-
-    .hero h1{
-        font-size:2.5rem;
-    }
+    margin-top:8px;
 
 }
 
-@media(max-width:600px){
+/* ================= MOBILE ================= */
 
-    .hero h1{
-        font-size:2rem;
-    }
+@media(max-width:768px){
 
-    .hero p{
-        font-size:1rem;
-    }
+.navbar{
 
-    .nav-links{
-        justify-content:center;
-    }
+flex-direction:column;
 
-    .btn-primary,
-    .btn-secondary,
-    .wallet-btn{
-        width:100%;
-        max-width:260px;
-    }
+gap:20px;
+
+}
+
+.nav-links{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.hero h1{
+
+font-size:38px;
+
+}
+
+.buttons{
+
+flex-direction:column;
+
+}
+
+.wallet-btn{
+
+width:100%;
+
+}
+
+.hero-btn{
+
+width:100%;
+
+}
 
 }
