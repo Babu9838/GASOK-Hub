@@ -1,20 +1,22 @@
-// ==========================
-// GASOK Hub - script.js
-// ==========================
+// ==========================================
+// GASOK Hub - script.js (Version 2.0)
+// ==========================================
 
 console.log("🚀 GASOK Hub Loaded");
 
-// Current Year (Footer)
+// ==========================
+// Footer Copyright
+// ==========================
 const copyright = document.querySelector(".copyright");
 
 if (copyright) {
     copyright.innerHTML = `© ${new Date().getFullYear()} GASOK Hub • Built with ❤️ by Babu Saha`;
 }
 
-// Smooth Button Animation
-const buttons = document.querySelectorAll(".btn-primary, .btn-secondary");
-
-buttons.forEach((button) => {
+// ==========================
+// Button Animation
+// ==========================
+document.querySelectorAll(".btn-primary, .btn-secondary").forEach((button) => {
     button.addEventListener("mouseenter", () => {
         button.style.transform = "translateY(-3px)";
     });
@@ -24,10 +26,10 @@ buttons.forEach((button) => {
     });
 });
 
+// ==========================
 // Feature Card Animation
-const cards = document.querySelectorAll(".card");
-
-cards.forEach((card) => {
+// ==========================
+document.querySelectorAll(".card").forEach((card) => {
     card.addEventListener("mouseenter", () => {
         card.style.transform = "translateY(-8px)";
     });
@@ -37,26 +39,118 @@ cards.forEach((card) => {
     });
 });
 
+// ==========================
 // Welcome Message
+// ==========================
 window.addEventListener("load", () => {
     console.log("Welcome to GASOK Hub 🚀");
 });
 
-// ==========================
-// Future Web3 Functions
-// ==========================
+// ==========================================
+// Wallet Button
+// ==========================================
+const connectBtn = document.getElementById("connectWallet");
 
-// MetaMask Connection
+// ==========================================
+// GIWA Network Configuration
+// ==========================================
+const GIWA_NETWORK = {
+    chainId: "0x164ce",
+    chainName: "GIWA Sepolia",
+    nativeCurrency: {
+        name: "Ethereum",
+        symbol: "ETH",
+        decimals: 18
+    },
+    rpcUrls: [
+        "https://sepolia-rpc.giwa.io"
+    ],
+    blockExplorerUrls: [
+        "https://sepolia-explorer.giwa.io"
+    ]
+};
+
+// ==========================================
+// Add or Switch GIWA Network
+// ==========================================
+async function addGIWANetwork() {
+
+    if (!window.ethereum) return;
+
+    try {
+
+        await window.ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: GIWA_NETWORK.chainId }]
+        });
+
+    } catch (error) {
+
+        if (error.code === 4902) {
+
+            await window.ethereum.request({
+                method: "wallet_addEthereumChain",
+                params: [GIWA_NETWORK]
+            });
+
+        } else {
+            console.error(error);
+        }
+
+    }
+}
+
+// ==========================================
+// Connect Wallet
+// ==========================================
 async function connectWallet() {
-    alert("Wallet Connect feature is coming soon!");
+
+    if (!window.ethereum) {
+        alert("MetaMask is not installed.");
+        return;
+    }
+
+    try {
+
+        await addGIWANetwork();
+
+        const accounts = await window.ethereum.request({
+            method: "eth_requestAccounts"
+        });
+
+        const wallet = accounts[0];
+
+        connectBtn.textContent =
+            wallet.slice(0, 6) + "..." + wallet.slice(-4);
+
+        console.log("Connected Wallet:", wallet);
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Wallet connection failed.");
+
+    }
+
 }
 
-// Switch GIWA Network
-async function switchToGIWA() {
-    alert("GIWA Network integration is coming soon!");
+if (connectBtn) {
+    connectBtn.addEventListener("click", connectWallet);
 }
 
-// Get Wallet Balance
+// ==========================================
+// Future Features
+// ==========================================
+
 async function getWalletBalance() {
-    console.log("Balance feature coming soon...");
+    console.log("Coming Soon...");
 }
+
+function disconnectWallet() {
+    if (connectBtn) {
+        connectBtn.textContent = "Connect Wallet";
+    }
+    console.log("Wallet Disconnected");
+}
+
+console.log("✅ GASOK Hub Ready");
